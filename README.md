@@ -1,6 +1,11 @@
 # AsTeRICS based AT solution
 
-This folder contains an AsTeRICS based solution using the [APE (AsTeRICS Packaging Environment)](https://github.com/asterics/AsTeRICS/wiki/AsTeRICS-Packaging-Environment-(APE)) template folder structure.
+This folder contains an solution for an interaction between AsTeRICS and a KNX installation.
+
+This example contains the most important functions, like
+- Switching (On/Off)
+- Blinds (Up/Down)
+- Dimming (relative/absolute)
 
 # Prerequisites
 
