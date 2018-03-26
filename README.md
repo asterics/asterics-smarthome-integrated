@@ -7,6 +7,7 @@ This example contains the most important functions, like
 - Blinds (Up/Down)
 - Dimming (relative/absolute)
 
+
 # Prerequisites
 
 You need at least
