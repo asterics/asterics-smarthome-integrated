@@ -1,4 +1,4 @@
-# AsTeRICS based AT solution
+# AsTeRICS based KNX communication
 
 This folder contains an solution for an interaction between AsTeRICS and a KNX installation.
 
