@@ -26,6 +26,53 @@
 		<!-- Modal styleheet -->
 		<link rel="stylesheet" href="../startpage/style/modal.css">
 
+		<!-- Bootstrap core JavaScript
+		================================================== -->
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+			<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+		<!-- <script src="../startpage/lib/jquery-3.2.1.slim.min.js"></script> -->
+		<script src="../startpage/lib/jquery-3.2.1.js"></script>
+			<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> -->
+		<script src="../startpage/lib/popper.min.js"></script>
+			<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+		<script src="../startpage/lib/bootstrap.min.js"></script>
+		
+		<!-- Modal image
+		================================================== -->
+		<!-- Modal image container -->
+		<div id="modalwrapper" class="modal">
+				<span class="close" onclick="document.getElementById('modalwrapper').style.display='none'">&times;</span>
+				<img class="modal-content" id="modalimage">
+				<div id="caption"></div>
+		</div>
+		<!-- Modal image action script -->
+		<script src="../startpage/lib/modal.js"></script>
+		<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+	
+	
+		<!-- AsTeRICS
+		================================================== -->
+		<!-- provided from AsTeRICS 3.0 -->
+		<!-- jquery is already loaded above -->
+		<!-- <script type="text/javascript" src="../startpage/lib/jquery-3.2.1.min.js"></script> -->
+		<script src="../startpage/clientExample/javascript/JSmap.js"></script>
+		<script src="../startpage/clientExample/javascript/areCommunicator.js"></script>
+	
+		<!-- provided by this repository, should be part of the framework later -->
+		<script src="../startpage/lib/webAppUtils.js"></script>
+		<script src="../startpage/lib/modelManipulation.js"></script>
+		
+		<script type="text/javascript">
+			//Set the base URI of the running ARE instance.     
+			//You could also make this configurable by the user.
+			setBaseURI("http://localhost:8081/rest/");
+	
+			//Define file to path model file on the webserver.
+			var modelFilePathOnWebserver='webapps/asterics-solution-template/models/nameOfModelFile.acs';
+			//Init window.onload function to automatically update all widgets with a model binding with the values of the currently deployed model.
+			window.onload=updateWidgetsFromDeployedModel;		
+		</script>
+
 		<!--[if lt IE 9]>
 		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
@@ -128,7 +175,27 @@
 						<hr>
 					</p>
 				</div>
-
+				<div class="col" id="startmodel">
+					<h2>Start Model</h2>							
+					<ol>
+						<li>Start AsTeRICS Runtime Environment (ARE)</li>
+						<ul>
+							<li>Windows: ARE.exe</li>
+							<li>Linux / Mac OSX: asterics-are</li>
+						</ul>
+						<li><button onclick="applySettingsInXMLModelAndStart(modelFilePathOnWebserver)" title="Description: Applies all settings and starts the model" class="button"> Start Model </button></li>
+					</ol>								
+					You can adjust the many settings below and save them as default for the next ARE start.
+					<p>
+			 		<button onclick="saveSettingsAsAutostartModel(modelFilePathOnWebserver)" title="Description: Applies all settings and sets the model as autostart model" class="button"> Save Settings as Autostart </button>
+	
+					<!-- provide your input widgets with the data-asterics-model-binding-1 attribute here -->
+					<!-- 
+					<h4>Mouse Movement</h4>
+					<label for="speed">Mouse Speed: </label>
+					1 <input title="Mouse speed" type="range" id="speed" value="60" min="1" max="100" data-asterics-model-binding-1='{"componentKey": "Slider.1","propertyKey": "default"}'> 100
+					-->
+				</div>	
 				<!-- Section 4 -->
 				<div class="col" id="demos">
 					<h2>KNX Demo</h2>
@@ -233,9 +300,6 @@
 
 					<div class="col" id="relatedtutorials">
 						<h3>Related Tutorials</h3>
-						<ul>	
-							<li><a target="_blank" href="https://github.com/asterics/AsTeRICS/blob/master/Documentation/AsTeRICS_CameraMouseCreation_StepbyStep_Tutorial.pdf">Camera Mouse Creation StepbyStep Tutorial</a></li>
-						</ul>
 					</div>
 				</ul>
 
@@ -249,39 +313,4 @@
 	</body>
 
 	
-	<!-- Placed at the end, so the page loads faster -->
-	<!-- Bootstrap core JavaScript
-	================================================== -->
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-		<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
-	<!-- <script src="../startpage/lib/jquery-3.2.1.slim.min.js"></script> -->
-	<script src="../startpage/lib/jquery-3.2.1.js"></script>
-		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> -->
-	<script src="../startpage/lib/popper.min.js"></script>
-		<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
-	<script src="../startpage/lib/bootstrap.min.js"></script>
-	
-	<!-- Modal image
-	================================================== -->
-	<!-- Modal image container -->
-	<div id="modalwrapper" class="modal">
-			<span class="close" onclick="document.getElementById('modalwrapper').style.display='none'">&times;</span>
-			<img class="modal-content" id="modalimage">
-			<div id="caption"></div>
-	</div>
-	<!-- Modal image action script -->
-	<script src="../startpage/lib/modal.js"></script>
-	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
-
-
-	<!-- AsTeRICS
-	================================================== -->
-	<!-- provided from AsTeRICS 3.0 -->
-	<!-- FIXME: Is jquery file necessary anymore? -->
-	<!-- <script type="text/javascript" src="../startpage/lib/jquery-3.2.1.min.js"></script> -->
-	<script src="../startpage/clientExample/javascript/JSmap.js"></script>
-	<script src="../startpage/clientExample/javascript/areCommunicator.js"></script>
-
-	<!-- provided by this repository, should be part of the framework later -->
-	<script src="../startpage/lib/demoLib.js"></script>
 </html>
