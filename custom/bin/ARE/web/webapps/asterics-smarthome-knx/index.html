@@ -22,17 +22,51 @@
 		<!-- bootstrap 4 (#responsive) from http://getbootstrap.com -->
 		<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
 		<link rel="stylesheet" href="../startpage/style/bootstrap.min.css">
-			
+
 		<!-- Modal styleheet -->
 		<link rel="stylesheet" href="../startpage/style/modal.css">
 
-		<!--[if lt IE 9]>
-		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
+    <!-- provided from AsTeRICS 3.0 -->
+  	<script type="text/javascript" src="../startpage/lib/jquery-3.2.1.min.js"></script>
+    <script src="../startpage/clientExample/javascript/JSmap.js"></script>
+    <script src="../startpage/clientExample/javascript/areCommunicator.js"></script>
+	<!-- provided by this repository, should be part of the framework later -->
+	<script src="../startpage/lib/webAppUtils.js"></script>
+	<script src="../startpage/lib/modelManipulation.js"></script>
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+	<script type="text/javascript">
+		//Set the base URI of the running ARE instance.     
+		//You could also make this configurable by the user.
+		setBaseURI("http://localhost:8081/rest/");
+
+		var modelFilePathOnWebserver='webapps/asterics-smarthome-knx/models/KNX.acs';
+
+		function applyAndStart() {
+			/* 
+			Normally you can just call applySettingsInXMLModelAndStart(modelFilePathOnWebserver);
+			But to assign the switches to certain events we have to trigger the respective routing event (select1-select7) of
+			the EventRouter plugin.
+			*/
+			applySettingsInXMLModelAndStart(modelFilePathOnWebserver, function(data,HTTPStatus){
+				//We now have to manually change the event routes from the swith inputs to the assigned mouse events.			
+				triggerEvent(function(data,HTTPStatus){
+					triggerEvent(defaultSuccessCallback,defaultErrorCallback,"KeySwitch2EventRouter",$("#switch2Action").val());
+				},defaultErrorCallback,"KeySwitch1EventRouter",$("#switch1Action").val());
+			});
+		}
 		
+		window.onload=updateWidgetsFromDeployedModel;		
+	</script>
+	
+	
+
 		<title>AsTeRICS KNX Demo</title>
 	</head>
- 
+
 	<body>
 
 		<h1>AsTeRICS KNX Demo</h1>
@@ -90,7 +124,7 @@
 			<!-- Sections -->
 			<!-- TODO: Adapt as needed -->
 			<div class="container">
-			
+
 				<!-- Section 1 -->
 				<div class="col" id="objective">
 					<h2>Objective</h2>
@@ -100,7 +134,7 @@
 						<li>Blinds (Up/Down)</li>
 						<li>Dimming relative</li>
 						<li>Dimming absolute</li>
-					</ul>	
+					</ul>
 					<span class="sr-only">(current)</span></p>
 				</div><hr>
 
@@ -111,7 +145,7 @@
 						There are two rooms in the demo case. Heating, cooling, lighting and
 						shading are controlled by KNX components. The air ventilation system on the top is controlled by a
 						Wago PLC. On the right upper side a Raspberry Pi 3 is mounted.</p>
-					<img class="svgmodal" src="img/shk_front.jpg" width="50%" alt="TODO Textual alternative."/>
+					<img class="svgmodal" src="img/shk_front.jpg" width="50%" alt="Smart Home Kit - Demo Case"/>
 
 				</div><hr>
 
@@ -132,46 +166,70 @@
 				<!-- Section 4 -->
 				<div class="col" id="demos">
 					<h2>KNX Demo</h2>
-					
+
 					To run this demonstration, the IP address of the KNX/IP Router and the group addresses have to be adapted.
-					
+
 					<h3>Configure IP settings</h3>
-					
+
 					<p>The following IP addresses have to be adapted in the properties of the KNX plugin:
 					<ul>
 						<li>localIP: The IP address of the machine AsTeRICS is running </li>
 						<li>KNXNetIP: The IP address of the KNX IP gateway </li>
 					</ul>
-								
+
 						<img class="svgmodal" src="img/knx_ip.png" width="90%" alt="IP settings"/>
 						</p>
 					</div>
-					
+
 					<div class="col" id="demo2">
 						<h3>Adapt group addresses</h3>
 						As next step, the group addresses have to be adapted. In this demo, four different commands are implemented:
-						
+
 				    <ol>
 		   			  <li>Switching a light:</li>
 					  A light can by switched on and off with two buttons. In this demo case the group address is 1/0/0.
-					  
+
 					  <li>Move blinds:</li>
 					  The blinds are controlled with two buttons. The group address is 2/0/0.
-					  
+
 					  <li>Dimming a light with buttons:</li>
 					  The light is controlled with two buttons. The group address is 1/0/6.
-					  
+
 					  <li>Dimming a light with a slider:</li>
 					  The brightness of the light is controlled with the light. The group address is 1/0/8.
 					</ol>
 						<img class="svgmodal" src="img/knx_groupaddresses.png" width="80%" alt="edit group addresses"/>
 					</div><hr>
 
-				<!-- Section 4 -->
-				<div class="col" id="moreinfo">
-					<h2>More information</h2>
-				<h3>Input Port Description</h3>
-			
+<div class="col" id="configuration">
+    <h2>Configure for your system</h2>
+          <h3>IP settings:</h3>
+          <p><label for="localIP" title="Enter your local IP">local IP address of your Computer: </label>
+    	  <input id="localIP" type="text" placeholder="192.168.1.17" value="" data-asterics-model-binding-1='{"componentKey": "Knx.1","propertyKey": "localIP"}'></p>
+          <p><label for="knxIP" title="Enter your local IP"> IP address of the KNX/IP Router: </label>
+          <input id="knxIP" type="text" placeholder="192.168.1.2" value="" data-asterics-model-binding-1='{"componentKey": "Knx.1","propertyKey": "KNXNetIP"}'></p>
+          <h3>Group addresses:</h3>
+          <p><label for="Switch_GroupAddress" title="Enter your local IP"> Group address for Switching: </label>
+          <input id="Switch_GroupAddress" type="text" placeholder="1/0/0" value="" data-asterics-model-binding-1='{"componentKey": "Knx.1","propertyKey": "groupAddress1"}' data-asterics-model-binding-2='{"componentKey": "Knx.1","propertyKey": "groupAddress2"}'></p>
+          <p><label for="Blind_GroupAddress" title="Enter your local IP"> Group address for Shutters: </label>
+          <input id="Blind_GroupAddress" type="text" placeholder="1/0/0" value="" data-asterics-model-binding-1='{"componentKey": "Knx.1","propertyKey": "groupAddress3"}' data-asterics-model-binding-2='{"componentKey": "Knx.1","propertyKey": "groupAddress4"}'></p>
+          <p><label for="DimmAbs_GroupAddres" title="Enter your local IP"> Group address for Dimming (relative): </label>
+          <input id="DimmAbs_GroupAddres" type="text" placeholder="1/0/0" value="" data-asterics-model-binding-1='{"componentKey": "Knx.1","propertyKey": "groupAddress5"}' data-asterics-model-binding-2='{"componentKey": "Knx.1","propertyKey": "groupAddress6"}'></p>
+          <p><label for="DimmRel_GroupAddres" title="Enter your local IP"> Group address for Dimming (absolute):</label>
+          <input id="DimmRela_GroupAddres" type="text" placeholder="1/0/0" value="" data-asterics-model-binding-1='{"componentKey": "Knx.1","propertyKey": "groupAddressSlider1"}'></p>
+
+		  
+		  <p>
+		  <button onclick="applyAndStart()" title="Description: Applies all settings and starts the model" class="button"> Start Model </button>
+	 	  <button onclick="saveSettingsAsAutostartModel()" title="Description: Applies all settings and sets the model as autostart model" class="button"> Save Settings as Autostart </button>	
+		  <p>  
+		  
+		  
+     	<!-- Section 4 -->
+		<div class="col" id="moreinfo">
+		<h2>More information</h2>
+		<h3>Input Port Description</h3>
+
 <ul>
 <li><strong>actionString [string]:</strong> This port receives string commands for the KNX component. The commands have to be in the format "@KNX: group_address,datapoint_type,value". The delimiters ',', '#' and ' ' are allowed. An example for a valid command is"@KNX:1/1/1,1.001,on". As a valid command is received by the input port, the value is sent to the KNX group address. The group addresses comply to the setup of the KNX network which can be configured with the ETS software. </li>
 <li><strong>slider[1-6] [double]:</strong> Input port for a double value which is converted to a given datapoint (Property: DPTSlider[1-6]) and sent to the given KNX group address (Property: groupAddressSlider[1-6]
@@ -207,8 +265,8 @@
 <ul>
 <li><strong>event_out_[1-6]:</strong> When there is any activity on the given KNX group address, set by the properties (groupAddressTrigger[1-6]) an event is raised by this plugin.</li>
 </ul>
-	</div><hr>		
-				
+	</div><hr>
+
 				<!-- Section 5 -->
 				<div class="col" id="additional_material">
 					<h2>Additional Material</h2>
@@ -221,19 +279,19 @@
 
 					<div class="col" id="editmodel">
 						<h3>Edit Model</h3>
-						<a target="_blank" href="http://asterics.github.io/AsTeRICS/webapps/WebACS/?areBaseURI=http://localhost:8081&openFile=http://asterics.github.io/AsTeRICS/webapps/asterics-camerainput-cameramouse/models/XFaceTrackerMouse(WLM).acs">Open in WebACS</a>
+						<a target="_blank" href="http://asterics.github.io/AsTeRICS/webapps/WebACS/?areBaseURI=http://localhost:8081&openFile=http://asterics.github.io/AsTeRICS/webapps/asterics-smarthome-knx/models/KNX.acs">Open in WebACS</a>
 					</div>
 
 					<div class="col" id="sourcerepository">
 						<h3>Source Repository</h3>
-						<p>Fork and modify this <a target="_blank" href="https://github.com/asterics/asterics-camerainput-cameramouse">repository</a>.</p>
+						<p>Fork and modify this <a target="_blank" href="https://github.com/asterics/asterics-smarthome-knx">repository</a>.</p>
 					</div>
 
-					
+
 
 					<div class="col" id="relatedtutorials">
 						<h3>Related Tutorials</h3>
-						<ul>	
+						<ul>
 							<li><a target="_blank" href="https://github.com/asterics/AsTeRICS/blob/master/Documentation/AsTeRICS_CameraMouseCreation_StepbyStep_Tutorial.pdf">Camera Mouse Creation StepbyStep Tutorial</a></li>
 						</ul>
 					</div>
@@ -248,7 +306,7 @@
 
 	</body>
 
-	
+
 	<!-- Placed at the end, so the page loads faster -->
 	<!-- Bootstrap core JavaScript
 	================================================== -->
@@ -260,7 +318,7 @@
 	<script src="../startpage/lib/popper.min.js"></script>
 		<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
 	<script src="../startpage/lib/bootstrap.min.js"></script>
-	
+
 	<!-- Modal image
 	================================================== -->
 	<!-- Modal image container -->
