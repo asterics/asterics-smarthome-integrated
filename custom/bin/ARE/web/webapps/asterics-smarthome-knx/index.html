@@ -26,41 +26,41 @@
 		<!-- Modal styleheet -->
 		<link rel="stylesheet" href="../startpage/style/modal.css">
 
-    <!-- provided from AsTeRICS 3.0 -->
-  	<script type="text/javascript" src="../startpage/lib/jquery-3.2.1.min.js"></script>
-    <script src="../startpage/clientExample/javascript/JSmap.js"></script>
-    <script src="../startpage/clientExample/javascript/areCommunicator.js"></script>
-	<!-- provided by this repository, should be part of the framework later -->
-	<script src="../startpage/lib/webAppUtils.js"></script>
-	<script src="../startpage/lib/modelManipulation.js"></script>
-
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-	<script type="text/javascript">
-		//Set the base URI of the running ARE instance.     
-		//You could also make this configurable by the user.
-		setBaseURI("http://localhost:8081/rest/");
-
-		var modelFilePathOnWebserver='webapps/asterics-smarthome-knx/models/KNX.acs';
-
-		function applyAndStart() {
-			/* 
-			Normally you can just call applySettingsInXMLModelAndStart(modelFilePathOnWebserver);
-			But to assign the switches to certain events we have to trigger the respective routing event (select1-select7) of
-			the EventRouter plugin.
-			*/
-			applySettingsInXMLModelAndStart(modelFilePathOnWebserver, function(data,HTTPStatus){
-				//We now have to manually change the event routes from the swith inputs to the assigned mouse events.			
-				triggerEvent(function(data,HTTPStatus){
-					triggerEvent(defaultSuccessCallback,defaultErrorCallback,"KeySwitch2EventRouter",$("#switch2Action").val());
-				},defaultErrorCallback,"KeySwitch1EventRouter",$("#switch1Action").val());
-			});
-		}
-		
-		window.onload=updateWidgetsFromDeployedModel;		
-	</script>
+	    <!-- provided from AsTeRICS 3.0 -->
+	  	<script type="text/javascript" src="../startpage/lib/jquery-3.2.1.min.js"></script>
+	    <script src="../startpage/clientExample/javascript/JSmap.js"></script>
+	    <script src="../startpage/clientExample/javascript/areCommunicator.js"></script>
+		<!-- provided by this repository, should be part of the framework later -->
+		<script src="../startpage/lib/webAppUtils.js"></script>
+		<script src="../startpage/lib/modelManipulation.js"></script>
+	
+	    <!--[if lt IE 9]>
+	    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	    <![endif]-->
+	
+		<script type="text/javascript">
+			//Set the base URI of the running ARE instance.     
+			//You could also make this configurable by the user.
+			setBaseURI("http://localhost:8081/rest/");
+	
+			var modelFilePathOnWebserver='webapps/asterics-smarthome-knx/models/KNX.acs';
+	
+			function applyAndStart() {
+				/* 
+				Normally you can just call applySettingsInXMLModelAndStart(modelFilePathOnWebserver);
+				But to assign the switches to certain events we have to trigger the respective routing event (select1-select7) of
+				the EventRouter plugin.
+				*/
+				applySettingsInXMLModelAndStart(modelFilePathOnWebserver, function(data,HTTPStatus){
+					//We now have to manually change the event routes from the swith inputs to the assigned mouse events.			
+					triggerEvent(function(data,HTTPStatus){
+						triggerEvent(defaultSuccessCallback,defaultErrorCallback,"KeySwitch2EventRouter",$("#switch2Action").val());
+					},defaultErrorCallback,"KeySwitch1EventRouter",$("#switch1Action").val());
+				});
+			}
+			
+			window.onload=updateWidgetsFromDeployedModel;		
+		</script>
 	
 	
 
