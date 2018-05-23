@@ -134,8 +134,13 @@
 						Wago PLC. On the right upper side a Raspberry Pi 3 is mounted.</p>
 					<!--  Please mark the respective areas of the image: What is heating, cooling, lighting, ... -->
 					<!--  Please add a link to the system architecture schematic file and the group addresses export from the configuration SW -->
-					<img class="svgmodal" src="img/shk_front.jpg" width="50%" alt="Smart Home Kit - Demo Case"/>
-
+					<img class="svgmodal" src="img/shk_front.jpg" width="40%" alt="Smart Home Kit - Demo Case"/>
+					<p>
+					<p>
+					The KNX system is connected to the local network via LAN. The whole setup is illustrated in the following image:</p>
+					
+					<img class="svgmodal" src="img/knx_setup.png" width="90%" alt="Smart Home Kit - KNX Setup"/>
+					<p></p>
 				</div><hr>
 
 				<!-- Section 3 -->
@@ -156,7 +161,7 @@
 				<div class="col" id="demos">
 					<h2>Start Demo</h2>
 
-					To run this demonstration, the IP address of the KNX/IP Router and the group addresses have to be adapted below.
+					To run this demonstration, the IP address of the KNX/IP Router and the group addresses have to be adapted below. 
 				</div><hr>
 					
 				<div class="col" id="configuration">
@@ -167,23 +172,25 @@
 					<input id="knxIP" type="text" placeholder="192.168.1.2" value="" data-asterics-model-binding-1='{"componentKey": "Knx.1","propertyKey": "KNXNetIP"}'></p>
 					<h3>Group addresses</h3>
 					<p><label for="Switch_GroupAddress" title="Group address for Switching: ">Group address for Switching: </label>
-					<input id="Switch_GroupAddress" type="text" placeholder="1/0/0" value="" data-asterics-model-binding-1='{"componentKey": "Knx.1","propertyKey": "groupAddress1"}' data-asterics-model-binding-2='{"componentKey": "Knx.1","propertyKey": "groupAddress2"}'></p>
+					<input id="Switch_GroupAddress" type="text" placeholder="0/0/1" value="" data-asterics-model-binding-1='{"componentKey": "Knx.1","propertyKey": "groupAddress1"}' data-asterics-model-binding-2='{"componentKey": "Knx.1","propertyKey": "groupAddress2"}'></p>
 					<p><label for="Blind_GroupAddress" title="Group address for Shutters:">Group address for Shutters: </label>
-					<input id="Blind_GroupAddress" type="text" placeholder="1/0/0" value="" data-asterics-model-binding-1='{"componentKey": "Knx.1","propertyKey": "groupAddress3"}' data-asterics-model-binding-2='{"componentKey": "Knx.1","propertyKey": "groupAddress4"}'></p>
+					<input id="Blind_GroupAddress" type="text" placeholder="0/2/0" value="" data-asterics-model-binding-1='{"componentKey": "Knx.1","propertyKey": "groupAddress3"}' data-asterics-model-binding-2='{"componentKey": "Knx.1","propertyKey": "groupAddress4"}'></p>
 					<p><label for="DimmRel_GroupAddres" title="Group address for Dimming (relative)">Group address for Dimming (relative):</label>
-					<input id="DimmRela_GroupAddres" type="text" placeholder="1/0/0" data-asterics-model-binding-1='{"componentKey": "Knx.1","propertyKey": "groupAddress5"}' data-asterics-model-binding-2='{"componentKey": "Knx.1","propertyKey": "groupAddress6"}'></p>
+					<input id="DimmRela_GroupAddres" type="text" placeholder="0/1/1" data-asterics-model-binding-1='{"componentKey": "Knx.1","propertyKey": "groupAddress5"}' data-asterics-model-binding-2='{"componentKey": "Knx.1","propertyKey": "groupAddress6"}'></p>
 
 					<p>
 					<button onclick="applySettingsInXMLModelAndStart(modelFilePathOnWebserver)" title="Description: Applies all settings and starts the model" class="button"> Start Model </button>
 					<button onclick="saveSettingsAsAutostartModel()" title="Description: Applies all settings and sets the model as autostart model" class="button"> Save Settings as Autostart </button>	
 					<p>  
+					A ETS Group Address export is shown <a target="_blank" href="img/GroupAddressExport.xml">here.</a>
+					
 					</div>  
 		     	<!-- Section 4 -->
 				<div class="col" id="moreinfo">
 					<h2>More information</h2>
 					The screenshots below show the properties of the KNX plugin which are actually used to configure the system. For more details about their meaning, see the <a target="_blank" href="http://asterics.github.io/AsTeRICS/webapps/WebACS/help/index.html?plugins&actuators/Knx.htm">KNX plugin help</a>.
-					<p><p><img class="svgmodal" src="img/knx_ip.png" width="90%" alt="IP settings"/>
-					<p><p><img class="svgmodal" src="img/knx_groupaddresses.png" width="80%" alt="edit group addresses"/>					
+					<!-- <p><p><img class="svgmodal" src="img/knx_ip.png" width="70%" alt="IP settings"/> -->
+					<p><p><img class="svgmodal" src="img/knx_groupaddresses.png" width="50%" alt="edit group addresses"/>					
 				</div><hr>
 
 				<!-- Section 5 -->
