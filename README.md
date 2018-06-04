@@ -15,6 +15,7 @@ You need at least
 If you want to create deployment files (.exe, .deb,...), you must have installed additional dependencies like a JDK.
 2. [apache ant build framework (version >= 1.9.1)](http://ant.apache.org/bindownload.cgi) **or** an IDE for Java Developers, e.g. [Eclipse](http://www.eclipse.org/downloads/packages/eclipse-ide-java-developers/neon3) (already contains ant)
 2. [AsTeRICS 3.0](https://github.com/asterics/AsTeRICS/releases/tag/v3.0) installed **or** a snapshot of [AsTeRICS](https://github.com/asterics/AsTeRICS) cloned to a parallel folder of the project.
+3. A KNX system and a list of the group addresses.
 
 # Demos / Examples
 
