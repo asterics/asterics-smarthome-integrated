@@ -161,8 +161,8 @@
 				<div class="col" id="demos">
 					<h2>Start Demo</h2>
 
-					To run this demonstration, the IP address of the KNX/IP Router and the group addresses have to be adapted below. 
-				</div><hr>
+					To run this demonstration, the IP address of the KNX/IP Router and the group addresses have to be adapted below:
+				</div>
 					
 				<div class="col" id="configuration">
 					<h3>IP settings</h3>
@@ -180,11 +180,12 @@
 
 					<p>
 					<button onclick="applySettingsInXMLModelAndStart(modelFilePathOnWebserver)" title="Description: Applies all settings and starts the model" class="button"> Start Model </button>
-					<button onclick="saveSettingsAsAutostartModel()" title="Description: Applies all settings and sets the model as autostart model" class="button"> Save Settings as Autostart </button>	
+					<button onclick="saveSettingsAsAutostartModel(modelFilePathOnWebserver)" title="Description: Applies all settings and sets the model as autostart model" class="button"> Save Settings as Autostart </button>	
 					<p>  
 					A ETS Group Address export is shown <a target="_blank" href="img/GroupAddressExport.xml">here.</a>
 					
-					</div>  
+					</div>
+					<hr>
 		     	<!-- Section 4 -->
 				<div class="col" id="moreinfo">
 					<h2>More information</h2>
